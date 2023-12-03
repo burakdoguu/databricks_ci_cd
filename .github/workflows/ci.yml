@@ -20,3 +20,11 @@ jobs:
                 DATABRICKS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
               run: |
                 databricks repos list
+            
+            - name: databricks-import
+              uses: microsoft/databricks-import-notebook@v1.0.0
+              with:
+                databricks-host: ${{ vars.HOST }}
+                databricks-token: ${{ secrets.ACCESS_TOKEN }}
+                local-path: $GITHUB_WORKSPACE/wiews_data_upsert_mode.py
+                remote-path: "http://users/burak_doguu_hotmail.com#ext#@burakdoguuhotmail.onmicrosoft.com"
