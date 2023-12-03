@@ -1,0 +1,22 @@
+name: databricks-cicd
+
+on: [workflow_dispatch]
+
+jobs:
+    db_azure:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
+            
+            
+            - name: Install databricks CLI
+              run: |
+                curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+            
+            - name: List databricks repo
+              env: 
+                DATABRICKS_HOST: ${{ vars.HOST }}
+                DATABRICKS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+              run: |
+                databricks repos list
